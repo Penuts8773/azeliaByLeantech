@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation </title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <!-- Prism.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+    <!-- Prism.js Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <div>
+            <img src="lt-logo.png">
+            <span>Azelia</span>
+            <span style="font-size: x-small;"> Lean Tech </span>
+        </div>
+    </header>
+    <div class="container">
+        <nav>
+            <ul class="nav">
+                <li>
+                    <a href="#section1">Overview</a>
+                </li>
+                <li>
+                    <a  href="#section2" href="javascript:void(0);" onclick="toggleSubNav(this)">Features</a>
+                    <ul class="sub-nav">
+                        <li><a  class="sub-li" href="#section2-1">Customizable Password Policies</a></li>
+                        <li><a  class="sub-li" href="#section2-2">Up to date hashing algorithm</a></li>
+                        <li><a  class="sub-li" href="#section2-3">Pepper</a></li>
+                        <li><a  class="sub-li" href="#section2-4">Customizable Argon2 & bcrypt parameters</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#section3" href="javascript:void(0);" onclick="toggleSubNav(this)">Requirements</a>
+                    <ul class="sub-nav">
+                        <li><a  class="sub-li" href="#section3-1">Python Installation</a></li>
+                        <li><a  class="sub-li" href="#section3-2">Dependencies/libraries</a></li>
+                        <li><a  class="sub-li" href="#section3-3">System Requirements</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#section4" href="javascript:void(0);" onclick="toggleSubNav(this)">Algorithm Parameters</a>
+                    <ul class="sub-nav">
+                        <li><a  class="sub-li" href="#section4-1">Argon2 parameters</a></li>
+                        <li><a  class="sub-li" href="#section4-2">Bcrypt parameters</a></li>
+                        <li><a  class="sub-li" href="#section4-3">Password policies</a></li>
+                    </ul>
+                </li
+                ><li>
+                    <a href="#special" href="javascript:void(0);" onclick="toggleSubNav(this)">SQL database parameters</a>
+                </li>
+                <li>
+                    <a href="#section5" href="javascript:void(0);" onclick="toggleSubNav(this)">Functions</a>
+                    <ul class="sub-nav">
+                        <li><a  class="sub-li" href="#section5-1">PasswordHashGen</a></li>
+                        <li><a  class="sub-li" href="#section5-2">generate_hash</a></li>
+                        <li><a  class="sub-li" href="#section5-3">verify_hash</a></li>
+                        <li><a  class="sub-li" href="#usage">Usage</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#section6" href="javascript:void(0);" onclick="toggleSubNav(this)">Installation and Troubleshooting</a>
+                    <ul class="sub-nav">
+                        <li><a  class="sub-li" href="#section6-1">Download the Azelia package</a></li>
+                        <li><a  class="sub-li" href="#section6-3">Install the Azelia package</a></li>
+                        <li><a  class="sub-li" href="#section6-4">Missing Dependencies</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#section7" href="javascript:void(0);" onclick="toggleSubNav(this)">Testing</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="content">
+            <div id="section1" class="section">
+                <h2>OVERVIEW</h2>
+                <p style="font-weight: bold;">Azelia is a hashing algorithm developed to make password storage simpler and more secure.</p>
+            </div>
+            <div class="section">
+                <h2 id="section2">Features</h2>
+    
+                <h3 id="section2-1">Customizable Password Policies</h3>
+                <p>Customizable password policies to easily enforce better passsword patterns by setting a minimum number of upper/lowercase letters, symbols and many more.</p>
+    
+                <h3 id="section2-2">Up to date hashing algorithm</h3>
+                <p>Uses up to date hashing algorithm (argon2/bcrypt) for better support and more secure password storage</p>
+            
+                <h3 id="section2-3">Pepper</h3>
+                <p>Runs plaintext password trough argon2 to be used as pepper.</p>
+
+                <h3 id="section2-4">Customizable Argon2 & bcrypt parameters</h3>
+                <p>algorithm parameters like workfactor, salt legnth, time cost and many more can easily be configured trough azeliaconfig.py</p>
+            </div>
+            <div class="section">
+                <h2 id="section3">Requirements</h2>
+    
+                <h3 id="section3-1">Python Installation</h3>
+                <p>Requires Python 3.13.1 or newer</p>
+    
+                <h3 id="section3-2">Dependencies/libraries</h3>
+                <p>
+                    <pre>
+       bcrypt  3.2.0 or newer
+       argon2-cffi 21.1.0 or newer
+       re 2.2.1 or newer 
+       mysql-connector-python 8.0.27 or newer
+                    </pre>
+                </p>
+    
+                <h3 id="section3-3">System Requirements</h3>
+                <p>a modern desktop or laptop with a recent CPU (e.g., Intel Core i5 or i7, AMD Ryzen 5 or 7) and sufficient RAM (8 GB or more) is highly recommended</p>
+            </div>
+            <div class="section">
+                <h2 id="section4">Algorithm Parameters</h2>
+    
+                <h3 id="section4-1">Argon2 parameters</h3>
+                <p>
+                    <pre>
+                        <code class="language-python">
+ARGON2_TIME_COST = The time cost for Argon2 (number of iterations)
+ARGON2_MEMORY_COST = Memory cost in kibibytes
+ARGON2_PARALLELISM = Number of threads used by Argon2
+ARGON2_HASH_LENGTH = Length of the hash produced by Argon2
+ARGON2_SALTSIZE = Length of the salt for Argon2
+                        </code>
+                    </pre>
+                </p>
+    
+                <h3 id="section4-2">Bcrypt parameters</h3>
+                <p>
+                    <pre>
+                        <code class="language-python">
+BCRYPT_WORK_FACTOR = The work factor for bcrypt, higher is more secure but slower
+                        </code>
+                    </pre>
+                </p>
+    
+                <h3 id="section4-3">Password policies</h3>
+                <p>
+                    <pre>
+                        <code class="language-python">
+MIN_UPPERCASE = Minimum number of uppercase letters in the password
+MIN_LOWERCASE = Minimum number of lowercase letters in the password
+MIN_DIGITS = Minimum number of digits in the password
+MIN_SYMBOLS = Minimum number of symbols in the password
+MIN_LENGTH = Minimum length of the password
+SPECIAL_CHARACTERS = Any non-alphanumeric character
+                        </code>
+                    </pre>
+                </p>
+            </div>
+            <div class="section">
+                <h2 id="special">SQL database parameters</h2>
+                <pre>
+                    <code class="language-python">
+# remove if not using flask
+SECRET_KEY = os.getenv('FLASK_SECRET_KEY', 'default_secret_key')
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False
+# ----------------------------
+MYSQL_HOST = 'your_host'
+MYSQL_USER = 'your_username'
+MYSQL_PASSWORD = 'your_password'
+MYSQL_DB = 'your_db'
+USER_TABLE_NAME = 'your_user_table'
+                    </code>
+                </pre>
+            </div>
+            <div class="section">
+                <h2 id="section5">Functions</h2>
+
+                <h3 id="section5-1">PasswordHashGen</h3>
+                <p>core Function that contains the generate_hash and verify_hash functions <br>
+                    <pre>
+                        <code class="language-python">
+class PasswordHashGen:
+def __init__(self):
+    self.__work_factor = AzeliaConfig.BCRYPT_WORK_FACTOR
+    self.__argon2 = PasswordHasher(
+        time_cost=AzeliaConfig.ARGON2_TIME_COST,
+        memory_cost=AzeliaConfig.ARGON2_MEMORY_COST,
+        parallelism=AzeliaConfig.ARGON2_PARALLELISM,
+        hash_len=AzeliaConfig.ARGON2_HASH_LENGTH,
+        salt_len=AzeliaConfig.ARGON2_SALTSIZE,
+    )
+
+def generate_hash(self, password: str) -> tuple[str, str]:
+    """
+    Generate a hashed password using Argon2 as a pepper and bcrypt for final hashing.
+    Returns the bcrypt hash and Argon2 pepper.
+    """
+    argon2_pepper = self.__argon2.hash(password)
+    password_with_pepper = password + argon2_pepper
+    salt = bcrypt.gensalt(rounds=self.__work_factor)
+    hashed = bcrypt.hashpw(password_with_pepper.encode('utf-8'), salt)
+    return hashed.decode('utf-8'), argon2_pepper
+
+def verify_hash(self, plain_password: str, hashed_password: str, stored_pepper: str) -> bool:
+    """
+    Verify a plain password against a bcrypt hash and stored Argon2 pepper.
+    """
+    try:
+        password_with_pepper = plain_password + stored_pepper
+        return bcrypt.checkpw(password_with_pepper.encode('utf-8'), hashed_password.encode('utf-8'))
+    except Exception:
+        return False
+                        </code>
+                    </pre>
+                </p>
+                <h3 id="section5-2">generate_hash</h3>
+                <p>Generate a hashed password using Argon2 as a pepper and bcrypt for final hashing. Returns the bcrypt hash and Argon2 pepper.
+                    <pre>
+                        <code class="language-python">
+def generate_hash(self, password: str) -> tuple[str, str]:
+
+    argon2_pepper = self.__argon2.hash(password)
+    password_with_pepper = password + argon2_pepper
+    salt = bcrypt.gensalt(rounds=self.__work_factor)
+    hashed = bcrypt.hashpw(password_with_pepper.encode('utf-8'), salt)
+    return hashed.decode('utf-8'), argon2_pepper
+                    </code>
+                </pre>
+            </p>
+
+            <h3 id="section5-3">verify_hash</h3>
+            <p>Verify a plain password against a bcrypt hash and stored Argon2 pepper.
+                <pre>
+                    <code class="language-python">
+def verify_hash(self, plain_password: str, hashed_password: str, stored_pepper: str) -> bool:
+
+    try:
+        password_with_pepper = plain_password + stored_pepper
+        return bcrypt.checkpw(password_with_pepper.encode('utf-8'), hashed_password.encode('utf-8'))
+    except Exception:
+        return False
+                        </code>
+                    </pre>
+                </p>
+                <h3 id="usage">Usage</h3>
+                <pre>
+                    <code class="language-python">
+# Assuming you have already imported the necessary modules and the PasswordHashGen class
+
+# Create an instance of the PasswordHashGen class
+password_hasher = PasswordHashGen()
+
+# Example: Generating a hashed password with Argon2 pepper and bcrypt hash
+password = "mySecretPassword123"
+hashed_password, argon2_pepper = password_hasher.generate_hash(password)
+
+print("Hashed password:", hashed_password)
+print("Argon2 pepper:", argon2_pepper)
+
+# Example: Verifying a plain password against the hashed password and stored Argon2 pepper
+plain_password = "mySecretPassword123"
+is_valid = password_hasher.verify_hash(plain_password, hashed_password, argon2_pepper)
+
+print("Password verification result:", is_valid)
+                    </code>
+                </pre>
+            </div>
+            <div class="section">
+                <h2 id="section6">Installation and Troubleshooting</h2>
+    
+                <h3 id="section6-1">Step 1:Download the Azelia package</h3>
+                <p>Download the Azelia package from the official website .</p>
+
+                <h3 id="section6-2">Step 2: unzip the file</h3>
+                <p>find the downloaded azelia.zip and unpack/unzip it by right clicking and selecting unzip</p>
+    
+                <h3 id="section6-3">Step 3: Installing the Azelia package</h3>
+                <p>Install the Azelia package by simply copy pasting the unzipped file into your project:</p>
+
+                <h3 id="section6-4">Missing Dependencies</h3>
+                <ol>
+                    <li>
+                        <p>
+                            Open the terminal and navigate to the directory where your requirements.txt file is located. <br>
+                        </p>
+                    </li>   
+                    <li>
+                        <p>
+                            Navigate to the Directory: First, ensure you are in the directory where your requirements.txt file is located. <br>
+                            You can use the cd command to change directories. <br>
+                            <code class="language-python">cd path/to/your/project/azelia</code>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            Install Dependencies: Run the following command to install the required dependencies using pip: <br>
+                            <code class="language-python">pip install -r requirements.txt</code>
+                        </p>
+                </ol>
+            </div>
+            <div class="section">
+                <h2 id="section7">Testing</h2>
+                <p>You can use the azelia_test.py file from that comes with azelia upon download, or you can copy this code</p>
+                <pre>
+                    <code class="language-python">
+    import unittest
+    from unittest.mock import MagicMock
+    from azelia.password_handler import PasswordManager
+    from azelia.password_policies import PasswordPolicies
+    from azelia.azelia import PasswordHashGen
+    from mysql.connector import connect
+    
+    class TestPasswordManager(unittest.TestCase):
+    
+        def setUp(self):
+            self.mock_connection = MagicMock()
+            self.password_manager = PasswordManager(connection=self.mock_connection)
+            self.password_policies = PasswordPolicies()
+            self.password_hash_gen = PasswordHashGen()
+    
+        def test_create_user_success(self):
+            """Test creating a user successfully."""
+            self.mock_connection.cursor().fetchone.return_value = None
+            self.mock_connection.cursor().execute.return_value = None
+            self.mock_connection.commit.return_value = None
+    
+            result, messages = self.password_manager.create_user("testuser", "StrongPass1!")
+            print("Function: test_create_user_success")
+            print("Result:", result)
+            print("Expected: True")
+            print("Messages:", messages)
+            print("Expected Messages: [\"Account successfully created! Please log in.\"]\n")
+            self.assertTrue(result)
+            self.assertEqual(messages, ["Account successfully created! Please log in."])
+    
+        def test_create_user_already_exists(self):
+            """Test creating a user that already exists."""
+            self.mock_connection.cursor().fetchone.return_value = ("testuser",)
+    
+            result, messages = self.password_manager.create_user("testuser", "StrongPass1!")
+            print("Function: test_create_user_already_exists")
+            print("Result:", result)
+            print("Expected: False")
+            print("Messages:", messages)
+            print("Expected Messages: [\"Username already taken\"]\n")
+            self.assertFalse(result)
+            self.assertEqual(messages, ["Username already taken"])
+    
+        def test_authenticate_user_success(self):
+            """Test authenticating a user successfully."""
+            self.mock_connection.cursor().fetchone.return_value = ("bcrypt_hashed_password", "argon2_pepper")
+            self.password_manager._PasswordManager__hasher.verify_hash = MagicMock(return_value=True)
+    
+            result, messages = self.password_manager.authenticate_user("testuser", "StrongPass1!")
+            print("Function: test_authenticate_user_success")
+            print("Result:", result)
+            print("Expected: True")
+            print("Messages:", messages)
+            print("Expected Messages: []\n")
+            self.assertTrue(result)
+            self.assertEqual(messages, [])
+    
+        def test_authenticate_user_wrong_password(self):
+            """Test authenticating a user with the wrong password."""
+            self.mock_connection.cursor().fetchone.return_value = ("bcrypt_hashed_password", "argon2_pepper")
+            self.password_manager._PasswordManager__hasher.verify_hash = MagicMock(return_value=False)
+    
+            result, messages = self.password_manager.authenticate_user("testuser", "WrongPass")
+            print("Function: test_authenticate_user_wrong_password")
+            print("Result:", result)
+            print("Expected: False")
+            print("Messages:", messages)
+            print("Expected Messages: [\"Incorrect password\"]\n")
+            self.assertFalse(result)
+            self.assertEqual(messages, ["Incorrect password"])
+    
+        def test_authenticate_user_not_found(self):
+            """Test authenticating a user that does not exist."""
+            self.mock_connection.cursor().fetchone.return_value = None
+    
+            result, messages = self.password_manager.authenticate_user("nonexistentuser", "StrongPass1!")
+            print("Function: test_authenticate_user_not_found")
+            print("Result:", result)
+            print("Expected: False")
+            print("Messages:", messages)
+            print("Expected Messages: [\"Username not found\"]\n")
+            self.assertFalse(result)
+            self.assertEqual(messages, ["Username not found"])
+    
+        def test_check_password_strength_success(self):
+            """Test password strength with a valid password."""
+            result, errors = self.password_policies.check_password_strength("StrongPass1!")
+            print("Function: test_check_password_strength_success")
+            print("Result:", result)
+            print("Expected: True")
+            print("Errors:", errors)
+            print("Expected Errors: []\n")
+            self.assertTrue(result)
+            self.assertEqual(errors, [])
+    
+        def test_check_password_strength_failure(self):
+            """Test password strength with an invalid password."""
+            result, errors = self.password_policies.check_password_strength("weak")
+            print("Function: test_check_password_strength_failure")
+            print("Result:", result)
+            print("Expected: False")
+            print("Errors:", errors)
+            print("Expected Errors: [\"Password must be at least 8 characters long.\",
+            \"Password must contain at least 1 uppercase letter(s).\", \"Password must contain at least 1 digit(s).\", 
+            \"Password must contain at least 1 special character(s).\"]\n")
+            self.assertFalse(result)
+            self.assertIn("Password must be at least 8 characters long.", errors)
+            self.assertIn("Password must contain at least 1 uppercase letter(s).", errors)
+            self.assertIn("Password must contain at least 1 digit(s).", errors)
+            self.assertIn("Password must contain at least 1 special character(s).", errors)
+    
+        def test_generate_hash_and_verify(self):
+            """Test PasswordHashGen generate_hash and verify_hash methods."""
+            password = "StrongPass1!"
+            hashed_password, pepper = self.password_hash_gen.generate_hash(password)
+            result = self.password_hash_gen.verify_hash(password, hashed_password, pepper)
+    
+            print("Function: test_generate_hash_and_verify")
+            print("Generated Hash:", hashed_password)
+            print("Generated Pepper:", pepper)
+            print("Verification Result:", result)
+            print("Expected: True\n")
+    
+            self.assertTrue(result)
+    
+    if __name__ == "__main__":
+        unittest.main()
+    
+                    </code>
+                </pre>
+            <h3>Prerequisites</h3>
+                <ol>
+                    <li>
+                        <ul>Install mysql-connector-python <code class="language-python">pip install mysql-connector-python</code><br>
+                            Ensure password_handler.py, password_policies.py, and azelia.py are available, and mock the MySQL connection for testing.
+                        </ul>
+
+                    </li>
+                </ol>  
+                <h3>Test Cases Overview</h3>
+                <ol>
+
+                    <li class="test-case">
+                        <h3>test_create_user_success</h3>
+                        <p><strong>Test:</strong> Tests successful user creation.</p>
+                        <p><strong>Expected:</strong> <span class="expected">True</span>, message: <span class="expected">["Account successfully created!"]</span></p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_create_user_already_exists</h3>
+                        <p><strong>Test:</strong> Tests user creation with an existing username.</p>
+                        <p><strong>Expected:</strong> <span class="expected">False</span>, message: <span class="expected">["Username already taken"]</span></p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_authenticate_user_success</h3>
+                        <p><strong>Test:</strong> Tests successful user authentication.</p>
+                        <p><strong>Expected:</strong> <span class="expected">True</span>, message: <span class="expected">[]</span></p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_authenticate_user_wrong_password</h3>
+                        <p><strong>Test:</strong> Tests authentication with an incorrect password.</p>
+                        <p><strong>Expected:</strong> <span class="expected">False</span>, message: <span class="expected">["Incorrect password"]</span></p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_authenticate_user_not_found</h3>
+                        <p><strong>Test:</strong> Tests authentication for a non-existent user.</p>
+                        <p><strong>Expected:</strong> <span class="expected">False</span>, message: <span class="expected">["Username not found"]</span></p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_check_password_strength_success</h3>
+                        <p><strong>Test:</strong> Tests valid password strength.</p>
+                        <p><strong>Expected:</strong> <span class="expected">True</span>, no errors.</p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_check_password_strength_failure</h3>
+                        <p><strong>Test:</strong> Tests invalid password strength.</p>
+                        <p><strong>Expected:</strong> <span class="expected">False</span>, errors include length, uppercase, digits, special characters.</p>
+                    </li>
+                    <li class="test-case">
+                        <h3>test_generate_hash_and_verify</h3>
+                        <p><strong>Test:</strong> Tests hash generation and verification.</p>
+                        <p><strong>Expected:</strong> <span class="expected">True</span> after verification.</p>
+                    </li>
+                </ol>
+
+                    
+            </div>
+        </div>
+    </div>
+    <footer>
+        &copy; <span>Azelia</span>
+        <span style="font-size: x-small;"> Lean Tech </span>
+    </footer>
+    </div>
+</body>
+</html>
